@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -182,10 +183,10 @@ namespace GorillaFriends
                         if (__instance.lines[i].linePlayer != null)
                         {
                             var usrid = __instance.lines[i].linePlayer.UserId;
-                            var txtusr = __instance.lines[i].playerVRRig.playerText;
+                            var txtusr = __instance.lines[i].playerVRRig.playerText1;
                             bool isLocalPlaya = __instance.lines[i].linePlayer.IsLocal;
 
-                            Text boardText = __instance.boardText;
+                            TextMeshPro boardText = __instance.boardText;
                             if (!isLocalPlaya && Main.IsInFriendList(usrid))
                             {
                                 boardText.text += Main.s_clrFriend + __instance.NormalizeName(true, __instance.lines[i].linePlayer.NickName) + "</color>";
@@ -195,7 +196,7 @@ namespace GorillaFriends
                             {
                                 boardText.text += Main.s_clrVerified + __instance.NormalizeName(true, __instance.lines[i].linePlayer.NickName) + "</color>";
                                 txtusr.color = Main.m_clrVerified;
-                                if (__instance.lines[i].linePlayer.IsLocal) GorillaTagger.Instance.offlineVRRig.playerText.color = Main.m_clrVerified;
+                                if (__instance.lines[i].linePlayer.IsLocal) GorillaTagger.Instance.offlineVRRig.playerText1.color = Main.m_clrVerified;
                             }
                             else if (!isLocalPlaya && !Main.NeedToCheckRecently(usrid) && Main.HasPlayedWithUsRecently(usrid) == Main.eRecentlyPlayed.Before)
                             {
@@ -286,7 +287,7 @@ namespace GorillaFriends
                 if (!Main.m_listScoreboards.Contains(__instance))
                 {
                     Main.m_listScoreboards.Add(__instance);
-                    __instance.boardText.supportRichText = true;
+                    __instance.boardText.richText = true;
 
                     var ppTmp = __instance.buttonText.transform.localPosition;
                     var sd = __instance.buttonText.rectTransform.sizeDelta;
